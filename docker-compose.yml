@@ -1,0 +1,23 @@
+services:
+  mysql:
+    container_name: mysql-eval
+    ports:
+      - "33601:3306"
+    networks:
+      - network-eval
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+  php-apache:
+    container_name: php-apache-eval
+    ports:
+      - "80:80"
+    networks:
+      - network-eval
+    volumes:
+      - .\:/var/www/html
+    image: damienpm/php-apache-mysqli
+
+networks:
+  network-eval: {}
